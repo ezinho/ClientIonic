@@ -1,14 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $http) {
-
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
+.controller('AppCtrl', function($scope, $ionicModal, $http, $state, $ionicPopup) {
 
   $scope.addWord = {};
   $scope.searchWord = {};
@@ -18,21 +10,57 @@ angular.module('starter.controllers', [])
   $scope.doAdd = function() {
     console.log('word added', $scope.addWord.word);
      var parameter = "{'word' : {	'label' : '"+$scope.addWord.word+"'}}"
-    $http.post('http://172.20.10.14:8080/server/remote/services/words',parameter).
+    $http.post('http://10.162.128.70:8080/server/remote/services/words',parameter).
     then(function(response) {
+
+            var alertPopup = $ionicPopup.alert({
+              title: 'Mot ajouter',
+            });
+            $scope.addWord.word= null
             $scope.greeting = response.data;
             console.log(response)
+
         });
   };
 
+  $scope.doDelete = function(obj) {
+    console.log('word delete', obj.id);
+    $http.delete('http://10.162.128.70:8080/server/remote/services/words/'+obj.id).
+    then(function(response) {
+
+      console.log('deleted word')
+      // $scope.addWord.word= null
+      var alertPopup = $ionicPopup.alert({
+        title: 'Mot supprimer',
+      });
+      $state.go('app.dico')
+
+    })
+  }
+
     $scope.doSearch = function() {
-    console.log('word search', $scope.searchWord.word);
-        $http.get('http://172.20.10.14:8080/server/remote/services/words?contains='+$scope.searchWord.word).
+    console.log('word search', $scope.addWord.word);
+        $http.get('http://10.162.128.70:8080/server/remote/services/words?contains='+$scope.addWord.word).
         then(function(response) {
-            $scope.greeting = response.data;
-            console.log(response)
+          
+          $scope.myArrayOfWord = response.data.word;
+          console.log($scope.myArrayOfWord);
+          $state.go('app.search')
+
         });
   };
+
+    $scope.doFile = function() {
+      console.log('search file');
+          $http.get('http://10.162.128.70:8080/server/remote/services/decodedFiles').
+          then(function(response) {
+            
+            $scope.myArrayOfFile = response.data.decodedFile;
+            console.log($scope.myArrayOfFile);
+            $state.go('app.file')
+
+          });
+    };
 
 })
 

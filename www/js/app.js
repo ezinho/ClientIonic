@@ -51,6 +51,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    .state('app.file', {
+      url: '/file',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/file.html',
+          // controller: 'dicoCtrl'
+        }
+      }
+    })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/dico');
 });

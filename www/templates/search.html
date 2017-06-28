@@ -1,5 +1,14 @@
-<ion-view view-title="Search">
+<ion-view view-title="Recherche" class="padding">
   <ion-content>
-    <h1>Search</h1>
-  </ion-content>
+    <h1>Résultat de la recherche</h1>
+    <ion-list class="search-list">
+      <ion-item ng-repeat="obj in myArrayOfWord" class="word">
+        <div class="theWord">
+          <div ng-bind-html="obj.label"></div>
+          <button ng-click="doDelete({{obj}})" 
+          style="background-color: red; color: white; width: 15%; height: 10%; float: right; margin-top: -30px; margin-bottom: -5px;" 
+          class="button button-icon icon ion-close"></button>
+        </div>
+      </ion-item>
+    </ion-list>
 </ion-view>

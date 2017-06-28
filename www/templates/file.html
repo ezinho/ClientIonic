@@ -1,0 +1,14 @@
+<ion-view view-title="Fichier" class="padding">
+  <ion-content>
+    <h1>Résultat</h1>
+    <ion-list class="search-list">
+      <ion-item ng-repeat="obj in myArrayOfFile" class="file">
+        <div class="theFile">
+          <strong>nom fichier: </strong><div ng-bind-html="obj.fileName"></div>
+          <strong>clé utilisé: </strong><div ng-bind-html="obj.decodeKey"></div>
+          <strong>premier mot: </strong><div ng-bind-html="obj.firstWord"></div>
+          <strong>mail trouvé: </strong><div ng-bind-html="obj.secret"></div>
+        </div>
+      </ion-item>
+    </ion-list>
+</ion-view>

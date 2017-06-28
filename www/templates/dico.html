@@ -1,46 +1,26 @@
-<ion-view view-title="Dico">
-  <ion-content padding>
+<ion-view view-title="Projet GEN">
+  <ion-content class="padding">
     <h2>Bienvenue sur notre plateforme</h2>
     <p>
-      Vous pouvez ici ajouter des mots dans la base de donnée ou en rechercher
+      Vous pouvez ici ajouter des mots dans la base de donnée ou en rechercher 
     </p>
 
-    <form ng-submit="doAdd()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Mot a ajouter</span>
-          <input type="text" ng-model="addWord.word">
-        </label>
-        <label class="item">
+    <label class="item item-input">
+      <span class="input-label">taper le mot ici : </span>
+      <input type="text" ng-model="addWord.word">
+    </label>
+
+    <form ng-if="addWord.word != null" ng-submit="doAdd()">
           <button class="button button-block button-positive" type="submit">Ajouter</button>
-        </label>
-      </div>
     </form>
 
-    <form ng-submit="doSearch()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Mot a rechercher</span>
-          <input type="text" ng-model="searchWord.word">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Rechercher</button>
-        </label>
-      </div>
+    <form ng-if="addWord.word != null" ng-submit="doSearch()">
+          <button  ng-submit="doSearch()" class="button button-block button-positive" type="submit">Rechercher</button>
     </form>
-
-
-        <!--<form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">mot rechercher</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">rechercher</button>
-        </label>
-      </div>
-    </form>-->
   
+    <form ng-submit="doFile()">
+          <button  ng-submit="doFile()" class="button button-block button-positive" type="submit">Afficher les fichiers décoder</button>
+    </form>
+
   </ion-content>
 </ion-view>
